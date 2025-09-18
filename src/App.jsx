@@ -1,35 +1,59 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react'
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import Home from "./pages/Home"
+import Blog from "./pages/Blog";
+import AllBlogs from "./pages/AllBlog";
+import NoPage from "./pages/NoPage";
+import BlogInfo from "./pages/BlogInfo";
+import AdminLogin from "./pages/Admin/AdminLogin";
+import Dashboard from "./pages/Admin/Dashboard";
+import CreateBlog from "./pages/Admin/createBlog";
+import { Toaster } from "react-hot-toast";
+import { Helmet } from "react-helmet";
+import MyState from './context/MyState';
+import logo from './assets/logo.png'
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
+  return ( 
+    // <MyState>
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+      <Helmet>
+          <title>BlogApp-By Habeeba Khatoon</title>
+          <link rel="icon" type="image/png" href={logo} />
+          <meta name="This webiste is about blogs related to tech" content="This is my awesome blog website about tech and life." />
+      </Helmet>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/allblogs" element={<AllBlogs />} />
+          <Route path="/bloginfo/:id" element={<BlogInfo />} />
+          <Route path="/adminlogin" element={<AdminLogin />} />
+          <Route path="/dashboard" element={
+            <ProtectedRouteForAdmin>
+              <Dashboard />
+            </ProtectedRouteForAdmin>} />
+          <Route path="/createblog" element={<ProtectedRouteForAdmin><CreateBlog />
+          </ProtectedRouteForAdmin>} />
+          <Route path="/*" element={<NoPage />} />
+
+        </Routes>
+        <Toaster />
+      </Router>
+      </>
+
+
   )
 }
 
 export default App
+
+export const ProtectedRouteForAdmin = ({ children }) => {
+  const admin = JSON.parse(localStorage.getItem('admin'))
+  if (admin?.user?.email === "160623747018@stanley.edu.in") {
+    return children
+  }
+  else {
+    return <Navigate to={'/adminlogin'} />
+  }
+}
