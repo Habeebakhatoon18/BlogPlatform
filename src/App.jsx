@@ -1,25 +1,23 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import Home from "./pages/Home"
-import Blog from "./pages/Blog";
-import AllBlogs from "./pages/AllBlog";
-import NoPage from "./pages/NoPage";
-import BlogInfo from "./pages/BlogInfo";
-import AdminLogin from "./pages/Admin/AdminLogin";
-import Dashboard from "./pages/Admin/Dashboard";
-import CreateBlog from "./pages/Admin/createBlog";
+import Home from "./pages/home/Home"
+import Blog from "./pages/blog/Blog";
+import AllBlogs from "./pages/allBlogs/AllBlogs";
+import NoPage from "./pages/nopage/Nopage";
+import BlogInfo from "./pages/blogInfo/BlogInfo";
+import AdminLogin from "../pages/admin/AdminLogin";
+import Dashboard from "../pages/admin/Dashboard";
+import CreateBlog from "../pages/admin/createBlog";
 import { Toaster } from "react-hot-toast";
 import { Helmet } from "react-helmet";
 import MyState from './context/MyState';
-import logo from './assets/logo.png'
-import { ThemeProvider } from "@material-tailwind/react";
+import logo from './assets/logo2.png'
+
 function App() {
   return ( 
-      <ThemeProvider>
-     <MyState>
-    
+    <MyState>
       <Helmet>
-          <title>BlogApp-By Habeeba Khatoon</title>
+          <title>Tech Diva-By Habeeba Khatoon</title>
           <link rel="icon" type="image/png" href={logo} />
           <meta name="This webiste is about blogs related to tech" content="This is my awesome blog website about tech and life." />
       </Helmet>
@@ -41,10 +39,8 @@ function App() {
         </Routes>
         <Toaster />
       </Router>
-    
+    </MyState>
 
-</MyState>
-</ThemeProvider>
   )
 }
 
