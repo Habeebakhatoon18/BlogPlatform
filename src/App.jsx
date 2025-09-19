@@ -12,11 +12,12 @@ import { Toaster } from "react-hot-toast";
 import { Helmet } from "react-helmet";
 import MyState from './context/MyState';
 import logo from './assets/logo.png'
-
+import { ThemeProvider } from "@material-tailwind/react";
 function App() {
   return ( 
-    // <MyState>
-    <>
+      <ThemeProvider>
+     <MyState>
+    
       <Helmet>
           <title>BlogApp-By Habeeba Khatoon</title>
           <link rel="icon" type="image/png" href={logo} />
@@ -40,9 +41,10 @@ function App() {
         </Routes>
         <Toaster />
       </Router>
-      </>
+    
 
-
+</MyState>
+</ThemeProvider>
   )
 }
 

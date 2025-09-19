@@ -1,8 +1,18 @@
 import React from 'react'
+import Navbar from './Navbar'
+import Footer from './Footer'
 
-const Layout = () => {
+
+function Layout({ children }) {
+
   return (
-    <div>Layout</div>
+    <div>
+      <Navbar />
+      <div className="main-content min-h-screen">
+        {children}
+      </div>
+      <Footer />
+    </div>
   )
 }
 
